@@ -16,3 +16,4 @@
 - No crear archivos nuevos salvo que sea estrictamente necesario.
 - No cambiar nombres de variables, métodos o estructuras existentes sin motivo funcional.
 - No introducir cambios cosméticos ni de estilo que generen ruido en el diff.
+- Evita usar QueryBuilders en el backend, si crees que es la mejor opcion puedes comentarmelo
