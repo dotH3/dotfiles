@@ -31,6 +31,9 @@
 }
 
 #cpu,
+#clock,
+#custom-cpu,
+#custom-docker,
 #battery,
 #pulseaudio,
 #custom-omarchy,
@@ -58,6 +61,28 @@
 
 tooltip {
   padding: 2px;
+}
+
+#custom-cpu {
+  /* color: #a55555; */
+}
+
+#custom-cpu.hot {
+  color: #ff1b1b;
+  /* border: #ff1b1b 2px solid;
+  border-radius: 10px;
+  padding: 0 10px; */
+}
+
+#custom-docker {}
+
+#custom-docker.on {
+  color: blue;
+}
+
+#custom-uptime {
+  /* font-size: 10px; */
+  color: burlywood
 }
 
 #custom-update {

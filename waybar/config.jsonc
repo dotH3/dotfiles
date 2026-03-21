@@ -2,16 +2,23 @@
   "reload_style_on_change": true,
   "layer": "top",
   "position": "top",
-  "spacing": 0,
+  "spacing": 2,
   "height": 26,
   "modules-left": ["custom/omarchy", "hyprland/workspaces"],
-  "modules-center": ["clock", "custom/update", "custom/voxtype", "custom/screenrecording-indicator"],
+  "modules-center": [
+    "clock",
+    "custom/uptime",
+    "custom/update",
+    "custom/voxtype",
+    "custom/screenrecording-indicator"
+  ],
   "modules-right": [
     "group/tray-expander",
-    "bluetooth",
+    // "custom/docker",
     "network",
     "pulseaudio",
-    "cpu",
+    // "cpu",
+    "custom/cpu",
     "battery"
   ],
   "hyprland/workspaces": {
@@ -53,18 +60,17 @@
     "signal": 7,
     "interval": 21600
   },
-
-  "cpu": {
-    "interval": 5,
-    "format": "󰍛",
-    "on-click": "omarchy-launch-or-focus-tui btop",
-    "on-click-right": "alacritty"
-  },
+  // "cpu": {
+  //   "interval": 5,
+  //   "format": "󰍛",
+  //   "on-click": "omarchy-launch-or-focus-tui btop",
+  //   "on-click-right": "alacritty"
+  // },
   "clock": {
-    "format": "{:L%A %H:%M}",
-    "format-alt": "{:L%d %B W%V %Y}",
-    "tooltip": false,
-    "on-click-right": "omarchy-launch-floating-terminal-with-presentation omarchy-tz-select"
+    "interval": 60,
+    "format": "{:%H:%M}",
+    "format-alt": "{:%H:%M %d/%m/%Y}",
+    "tooltip": false
   },
   "network": {
     "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
@@ -125,7 +131,7 @@
       "transition-duration": 600,
       "children-class": "tray-group-item"
     },
-    "modules": ["custom/expand-icon", "tray"]
+    "modules": ["custom/expand-icon", "tray", "custom/docker", "bluetooth"]
   },
   "custom/expand-icon": {
     "format": "",
@@ -157,5 +163,34 @@
   "tray": {
     "icon-size": 12,
     "spacing": 17
+  },
+  // H3
+  "custom/cpu": {
+    "interval": 5,
+    "exec": "$HOME/.config/waybar/logic/cpu-temp.sh",
+    "return-type": "json",
+    "format": "{text}",
+    "on-click": "omarchy-launch-or-focus-tui htop",
+    "tooltip-format": "{alt}"
+  },
+  "custom/uptime": {
+    "interval": 10,
+    "exec": "uptime | awk '{print $3}' | tr -d ','",
+    "format": "{}",
+    "tooltip": false
+  },
+  "custom/docker": {
+    "interval": 2,
+    "exec": "$HOME/.config/waybar/logic/docker_alive.sh",
+    "return-type": "json",
+    "format": "{text}",
+    "tooltip-format": "{alt}",
+    "on-click": "docker_up.sh",
+    "on-click-right": "docker_down.sh"
+  },
+  "custom/tinky": {
+    "format": "",
+    "tooltip-format": ""
   }
+  // https://www.nerdfonts.com/cheat-sheet
 }
