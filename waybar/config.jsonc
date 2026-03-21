@@ -14,7 +14,7 @@
   ],
   "modules-right": [
     "group/tray-expander",
-    // "custom/docker",
+    "custom/docker",
     "network",
     "pulseaudio",
     // "cpu",
@@ -131,7 +131,7 @@
       "transition-duration": 600,
       "children-class": "tray-group-item"
     },
-    "modules": ["custom/expand-icon", "tray", "custom/docker", "bluetooth"]
+    "modules": ["custom/expand-icon", "tray", "bluetooth"]
   },
   "custom/expand-icon": {
     "format": "",
@@ -181,12 +181,14 @@
   },
   "custom/docker": {
     "interval": 2,
+    "signal": 9,
     "exec": "$HOME/.config/waybar/logic/docker_alive.sh",
     "return-type": "json",
     "format": "{text}",
     "tooltip-format": "{alt}",
-    "on-click": "docker_up.sh",
-    "on-click-right": "docker_down.sh"
+    "on-click": "$HOME/.config/waybar/logic/docker_toggle.sh",
+    "on-click-right": "$HOME/dotfiles/scripts/docker_nuke.sh &",
+    "on-click-middle": "$HOME/dotfiles/scripts/sql_import.sh"
   },
   "custom/tinky": {
     "format": "",

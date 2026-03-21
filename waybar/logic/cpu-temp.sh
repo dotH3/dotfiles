@@ -1,7 +1,7 @@
 #!/bin/bash
 maxTemp=85
 normalIcon="󰍛"
-hotIcon="🔥"
+hotIcon=""
 
 temperature=$(sensors | grep 'Core 0' | awk '{print $3}' | tr -d '+' | cut -d'.' -f1)
 usage=$(top -bn1 | grep "Cpu(s)" | awk '{print $2}')

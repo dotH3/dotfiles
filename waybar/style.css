@@ -80,6 +80,14 @@ tooltip {
   color: blue;
 }
 
+#custom-docker.killing {
+  color: #ff1b1b;
+}
+
+#custom-docker.importing {
+  color: greenyellow;
+}
+
 #custom-uptime {
   /* font-size: 10px; */
   color: burlywood
