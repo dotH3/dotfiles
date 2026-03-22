@@ -33,6 +33,7 @@
 #cpu,
 #clock,
 #custom-cpu,
+#custom-dotfiles,
 #custom-docker,
 #battery,
 #pulseaudio,
@@ -56,7 +57,16 @@
 }
 
 #custom-expand-icon {
-  margin-right: 18px;
+  margin: 2px 8px;
+  color: #fffcf0;
+  background-color: burlywood;
+  opacity: 0.35;
+  border-radius: 100%;
+  padding: 0px 8px;
+}
+#custom-expand-icon:hover,
+#tray-expander:hover #custom-expand-icon {
+  opacity: 1;
 }
 
 tooltip {
@@ -84,8 +94,9 @@ tooltip {
   color: #ff1b1b;
 }
 
-#custom-docker.importing {
-  color: greenyellow;
+#custom-dotfiles {
+  /* color: lightblue; */
+  font-size: 13px;
 }
 
 #custom-uptime {

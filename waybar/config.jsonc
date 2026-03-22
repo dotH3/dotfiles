@@ -14,7 +14,8 @@
   ],
   "modules-right": [
     "group/tray-expander",
-    "custom/docker",
+    // "custom/dotfiles",
+    // "custom/docker",
     "network",
     "pulseaudio",
     // "cpu",
@@ -131,7 +132,7 @@
       "transition-duration": 600,
       "children-class": "tray-group-item"
     },
-    "modules": ["custom/expand-icon", "tray", "bluetooth"]
+    "modules": ["custom/expand-icon", "bluetooth", "custom/docker", "custom/dotfiles", "tray"]
   },
   "custom/expand-icon": {
     "format": "",
@@ -174,7 +175,7 @@
     "tooltip-format": "{alt}"
   },
   "custom/uptime": {
-    "interval": 10,
+    "interval": 60,
     "exec": "uptime | awk '{print $3}' | tr -d ','",
     "format": "{}",
     "tooltip": false
@@ -187,12 +188,13 @@
     "format": "{text}",
     "tooltip-format": "{alt}",
     "on-click": "$HOME/.config/waybar/logic/docker_toggle.sh",
-    "on-click-right": "$HOME/dotfiles/scripts/docker_nuke.sh &",
-    "on-click-middle": "$HOME/dotfiles/scripts/sql_import.sh"
+    "on-click-right": "$HOME/dotfiles/scripts/docker_nuke.sh &"
+    // "on-click-middle": "$HOME/dotfiles/scripts/sql_import.sh &"
   },
-  "custom/tinky": {
-    "format": "",
-    "tooltip-format": ""
+  "custom/dotfiles": {
+    "format": " ",
+    "on-click": "notify-send 'Backup' \"$($HOME/dotfiles/scripts/dotfiles_backup.sh)\"",
+    "tooltip-format": "Backup ~/dotfiles"
   }
   // https://www.nerdfonts.com/cheat-sheet
 }

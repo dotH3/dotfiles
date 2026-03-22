@@ -6,7 +6,7 @@ DB_PASS="rootpassword"
 SQL_FILE="$HOME/backups/ecomenu/primary.sql"
 
 importingFlag="/tmp/docker_importing"
-touch "$importingFlag"
+# touch "$importingFlag"
 pkill -RTMIN+9 waybar
 
 docker exec -i "$CONTAINER" mysql -u "$DB_USER" -p"$DB_PASS" \
