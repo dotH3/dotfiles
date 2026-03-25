@@ -132,7 +132,7 @@
       "transition-duration": 600,
       "children-class": "tray-group-item"
     },
-    "modules": ["custom/expand-icon", "bluetooth", "custom/docker", "custom/dotfiles", "tray"]
+    "modules": ["custom/expand-icon", "bluetooth", "custom/docker", "custom/dotfiles", "custom/restart", "tray"]
   },
   "custom/expand-icon": {
     "format": "",
@@ -192,9 +192,14 @@
     // "on-click-middle": "$HOME/dotfiles/scripts/sql_import.sh &"
   },
   "custom/dotfiles": {
-    "format": " ",
+    "format": "",
     "on-click": "notify-send 'Backup' \"$($HOME/dotfiles/scripts/dotfiles_backup.sh)\"",
     "tooltip-format": "Backup ~/dotfiles"
+  },
+  "custom/restart": {
+    "format": " ",
+    "on-click": "omarchy-restart-waybar",
+    "tooltip-format": "Restart Waybar"
   }
   // https://www.nerdfonts.com/cheat-sheet
 }

@@ -2,7 +2,7 @@
 dockerUp="docker_up.sh"
 dockerLs="docker_ls.sh"
 
-dockerIcon="  "
+dockerIcon=" "
 
 isUp=$($dockerLs | grep "running" | wc -l)
 

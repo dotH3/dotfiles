@@ -35,6 +35,7 @@
 #custom-cpu,
 #custom-dotfiles,
 #custom-docker,
+#custom-restart,
 #battery,
 #pulseaudio,
 #custom-omarchy,
@@ -104,6 +105,12 @@ tooltip {
   color: burlywood
 }
 
+#custom-restart:hover {
+  color: red;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
 #custom-update {
   font-size: 10px;
 }
@@ -135,3 +142,4 @@ tooltip {
 #custom-voxtype.recording {
   color: #a55555;
 }
+
