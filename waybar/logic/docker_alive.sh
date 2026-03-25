@@ -1,6 +1,6 @@
 #!/bin/bash
-dockerUp="docker_up.sh"
-dockerLs="docker_ls.sh"
+dockerUp="$HOME/dotfiles/scripts/docker_up.sh"
+dockerLs="$HOME/dotfiles/scripts/docker_ls.sh"
 
 dockerIcon=" "
 

@@ -1,14 +1,18 @@
 #!/bin/bash
-dockerUp="docker_up.sh"
-dockerDown="docker_down.sh"
-dockerLs="docker_ls.sh"
+exec >> /tmp/waybar-docker-click.log 2>&1
+set -x
 
-isUp=$($dockerLs | grep "running" | wc -l)
+DIR="$(cd "$(dirname "$0")" && pwd)"
+dockerUp="$HOME/dotfiles/scripts/docker_up.sh"
+dockerDown="$HOME/dotfiles/scripts/docker_down.sh"
+dockerLs="$HOME/dotfiles/scripts/docker_ls.sh"
 
-if [ "$isUp" -gt 0 ] 2>/dev/null; then
-  notify-send "Docker" "Apagando contenedores..."
-  $dockerDown &
+isUp="$("$dockerLs" | grep "running" | wc -l)"
+
+if [ "$isUp" -gt 0 ]; then
+  # notify-send "Docker" "Apagando contenedores..."
+  "$dockerDown"
 else
-  notify-send "Docker" "Levantando contenedores..."
-  $dockerUp &
+  # notify-send "Docker" "Levantando contenedores..."
+  "$dockerUp"
 fi

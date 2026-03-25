@@ -181,7 +181,7 @@
     "tooltip": false
   },
   "custom/docker": {
-    "interval": 2,
+    "interval": 10,
     "signal": 9,
     "exec": "$HOME/.config/waybar/logic/docker_alive.sh",
     "return-type": "json",

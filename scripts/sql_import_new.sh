@@ -12,7 +12,11 @@ START=$(date +%s)
 
 docker exec -i "$CONTAINER" mysql -u "$DB_USER" -p"$DB_PASS" \
   -e "CREATE DATABASE IF NOT EXISTS \`$DB_NAME\`;" && \
-docker exec -i "$CONTAINER" mysql -u "$DB_USER" -p"$DB_PASS" "$DB_NAME" < "$SQL_FILE"
+{
+  echo "SET foreign_key_checks=0; SET unique_checks=0; SET autocommit=0;"
+  cat "$SQL_FILE"
+  echo "COMMIT;"
+} | docker exec -i "$CONTAINER" mysql -u "$DB_USER" -p"$DB_PASS" "$DB_NAME"
 
 END=$(date +%s)
 ELAPSED=$((END - START))
@@ -21,3 +25,4 @@ rm -f "$importingFlag"
 pkill -RTMIN+9 waybar
 
 notify-send "ecomenu import" "Completado en ${ELAPSED}s"
+echo "Import completado en ${ELAPSED}s"
