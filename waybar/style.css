@@ -24,7 +24,11 @@
 
 window#waybar {
   /* background: rgba(0, 0, 0, 0.204); */
-  border-radius: 40px;
+  /* border-radius: 40px; */
+  /* fondo background con degradado de negro a rojo hacia abajo */
+  /* background: linear-gradient(to bottom, black, rgba(255, 255, 255, 0));  */
+  background: linear-gradient(to bottom, black, rgba(0, 0, 0, 0));
+
 }
 
 #workspaces button {
