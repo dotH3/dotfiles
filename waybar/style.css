@@ -68,7 +68,7 @@ tooltip {
   margin-right: 16px;
 }
 
-#custom-restart {
+#custom-shutdown {
   margin-right: 17px;
 }
 
@@ -121,6 +121,12 @@ tooltip {
 }
 
 #custom-restart:hover {
+  color: yellow;
+  /* font-size: 16px; */
+  transition: all 0.3s ease;
+}
+
+#custom-shutdown:hover {
   color: red;
   /* font-size: 16px; */
   transition: all 0.3s ease;

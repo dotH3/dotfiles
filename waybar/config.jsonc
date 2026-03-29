@@ -132,7 +132,7 @@
       "transition-duration": 600,
       "children-class": "tray-group-item"
     },
-    "modules": ["custom/expand-icon", "bluetooth", "custom/docker", "custom/dotfiles", "custom/restart", "tray"]
+    "modules": ["custom/expand-icon", "bluetooth", "custom/docker", "custom/dotfiles", "custom/restart", "custom/shutdown", "tray"]
   },
   "custom/expand-icon": {
     "format": "",
@@ -200,6 +200,11 @@
     "format": " ",
     "on-click": "omarchy-restart-waybar",
     "tooltip-format": "Restart Waybar"
+  },
+  "custom/shutdown": {
+    "format": "⏻ ",
+    "on-click": "systemctl poweroff",
+    "tooltip-format": "Power Off"
   }
   // https://www.nerdfonts.com/cheat-sheet
 }
