@@ -19,6 +19,7 @@
     "network",
     "pulseaudio",
     // "cpu",
+    "custom/memory",
     "custom/cpu",
     "battery"
   ],
@@ -70,7 +71,7 @@
   "clock": {
     "interval": 60,
     "format": "{:%H:%M}",
-    "format-alt": "{:%H:%M %d/%m/%Y}",
+    "format-alt": "{:%d/%m/%Y %H:%M }",
     "tooltip": false
   },
   "network": {
@@ -166,6 +167,14 @@
     "spacing": 17
   },
   // H3
+  "custom/memory": {
+    "interval": 5,
+    "exec": "$HOME/.config/waybar/logic/memory.sh",
+    "return-type": "json",
+    "format": "{text}",
+    "on-click": "omarchy-launch-or-focus-tui htop",
+    "tooltip-format": "{alt}"
+  },
   "custom/cpu": {
     "interval": 5,
     "exec": "$HOME/.config/waybar/logic/cpu-temp.sh",

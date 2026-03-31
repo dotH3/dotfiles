@@ -101,7 +101,6 @@ tooltip {
   color: #ff1b1b;
 }
 
-
 #custom-docker.on {
   color: blue;
 }
@@ -116,8 +115,7 @@ tooltip {
 }
 
 #custom-uptime {
-  /* font-size: 10px; */
-  color: @background
+  /* color: black; */
 }
 
 #custom-restart:hover {
