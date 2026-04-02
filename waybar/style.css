@@ -97,7 +97,7 @@ tooltip {
   padding: 2px;
 }
 
-#custom-cpu.hot {
+#custom-cpu.hot, #custom-memory.hot {
   color: #ff1b1b;
 }
 

@@ -1,12 +1,12 @@
 #!/bin/bash
-normalIcon="" 
+normalIcon=" " 
 hotIcon="󰀦"
 
 usage=$(free | grep Mem | awk '{printf "%.0f", ($3/$2)*100}')
 
 icon="$normalIcon"
 class=""
-if [ "$usage" -gt 50 ]; then
+if [ "$usage" -gt 40 ]; then
   icon="$hotIcon"
   class="hot"
 fi
