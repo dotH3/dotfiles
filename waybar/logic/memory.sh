@@ -6,7 +6,7 @@ usage=$(free | grep Mem | awk '{printf "%.0f", ($3/$2)*100}')
 
 icon="$normalIcon"
 class=""
-if [ "$usage" -gt 40 ]; then
+if [ "$usage" -gt 75 ]; then
   icon="$hotIcon"
   class="hot"
 fi

@@ -21,3 +21,4 @@ rm -f "$importingFlag"
 pkill -RTMIN+9 waybar
 
 notify-send "ecomenu import" "Completado en ${ELAPSED}s"
+echo "=> SQL restored in ${ELAPSED}s"
