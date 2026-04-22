@@ -4,11 +4,14 @@
   "position": "top",
   "spacing": 2,
   "height": 26,
-  "modules-left": ["custom/omarchy", "hyprland/workspaces"],
+  "modules-left": [
+    "custom/omarchy",
+    "hyprland/workspaces"
+  ],
   "modules-center": [
     "clock",
-    "custom/uptime",
-    "custom/update",
+    // "custom/uptime",
+    // "custom/update",
     "custom/voxtype",
     "custom/screenrecording-indicator"
   ],
@@ -70,12 +73,17 @@
   // },
   "clock": {
     "interval": 60,
-    "format": "{:%H:%M}",
-    "format-alt": "{:%d/%m/%Y %H:%M }",
-    "tooltip": false
+    "format": "{:%d/%m/%Y %H:%M }",
+    "format-alt": "{:%H:%M}"
   },
   "network": {
-    "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
+    "format-icons": [
+      "󰤯",
+      "󰤟",
+      "󰤢",
+      "󰤥",
+      "󰤨"
+    ],
     "format": "{icon}",
     "format-wifi": "{icon}",
     "format-ethernet": "󰀂",
@@ -88,13 +96,37 @@
     "on-click": "omarchy-launch-wifi"
   },
   "battery": {
-    "format": "{capacity}% {icon}",
-    "format-discharging": "{icon}",
-    "format-charging": "{icon}",
+    "format": "{icon}",
+    // "format-discharging": "{icon} {capacity}%",
+    "format-discharging": "BAT:{capacity}%",
+    // "format-charging": "{icon} {capacity}%",
+    "format-charging": "BAT:{capacity}%",
     "format-plugged": "",
     "format-icons": {
-      "charging": ["󰢜", "󰂆", "󰂇", "󰂈", "󰢝", "󰂉", "󰢞", "󰂊", "󰂋", "󰂅"],
-      "default": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
+      "charging": [
+        "󰢜",
+        "󰂆",
+        "󰂇",
+        "󰂈",
+        "󰢝",
+        "󰂉",
+        "󰢞",
+        "󰂊",
+        "󰂋",
+        "󰂅"
+      ],
+      "default": [
+        "󰁺",
+        "󰁻",
+        "󰁼",
+        "󰁽",
+        "󰁾",
+        "󰁿",
+        "󰂀",
+        "󰂁",
+        "󰂂",
+        "󰁹"
+      ]
     },
     "format-full": "󰂅",
     "tooltip-format-discharging": "{power:>1.0f}W↓ {capacity}%",
@@ -116,7 +148,8 @@
     "on-click": "omarchy-launch-bluetooth"
   },
   "pulseaudio": {
-    "format": "{icon}",
+    // "format": "{icon}  {volume}%",
+    "format": "VOL:{volume}% |",
     "on-click": "omarchy-launch-audio",
     "on-click-right": "pamixer -t",
     "tooltip-format": "Playing at {volume}%",
@@ -124,7 +157,11 @@
     "format-muted": "",
     "format-icons": {
       "headphone": "",
-      "default": ["", "", ""]
+      "default": [
+        "",
+        "",
+        ""
+      ]
     }
   },
   "group/tray-expander": {
@@ -133,7 +170,15 @@
       "transition-duration": 600,
       "children-class": "tray-group-item"
     },
-    "modules": ["custom/expand-icon", "bluetooth", "custom/docker", "custom/dotfiles", "custom/restart", "custom/shutdown", "tray"]
+    "modules": [
+      "custom/expand-icon",
+      "bluetooth",
+      "custom/docker",
+      "custom/dotfiles",
+      "custom/restart",
+      "custom/shutdown",
+      "tray"
+    ]
   },
   "custom/expand-icon": {
     "format": "",
