@@ -15,7 +15,7 @@ total=$(free -h | grep Mem | awk '{print $2}')
 used=$(free -h | grep Mem | awk '{print $3}')
 
 # text="$icon ${usage}%"
-text="RAM:${usage}% |"
+text="RAM:${usage}%"
 alt="RAM: ${used}/${total}"
 
 echo "{\"text\": \"$text\", \"alt\": \"$alt\", \"class\": \"$class\"}"

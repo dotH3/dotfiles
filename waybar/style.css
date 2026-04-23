@@ -52,10 +52,11 @@ tooltip {
 #bluetooth,
 #clock,
 #custom-cpu,
+#custom-memory,
 #custom-dotfiles,
 #custom-docker,
 #custom-restart,
-/* #battery, */
+#battery,
 #pulseaudio,
 #custom-omarchy,
 #custom-screenrecording-indicator,
@@ -95,6 +96,10 @@ tooltip {
 
 tooltip {
   padding: 2px;
+}
+
+#custom-separator {
+  color: red;
 }
 
 #custom-cpu.hot, #custom-memory.hot {

@@ -17,13 +17,13 @@
   ],
   "modules-right": [
     "group/tray-expander",
-    // "custom/dotfiles",
-    // "custom/docker",
     "network",
     "pulseaudio",
-    // "cpu",
+    "custom/separator",
     "custom/memory",
+    "custom/separator",
     "custom/cpu",
+    "custom/separator",
     "battery"
   ],
   "hyprland/workspaces": {
@@ -149,7 +149,7 @@
   },
   "pulseaudio": {
     // "format": "{icon}  {volume}%",
-    "format": "VOL:{volume}% |",
+    "format": "VOL:{volume}%",
     "on-click": "omarchy-launch-audio",
     "on-click-right": "pamixer -t",
     "tooltip-format": "Playing at {volume}%",
@@ -259,6 +259,9 @@
     "format": "⏻ ",
     "on-click": "systemctl poweroff",
     "tooltip-format": "Power Off"
+  },
+  "custom/separator": {
+    "format": "|"
   }
   // https://www.nerdfonts.com/cheat-sheet
 }

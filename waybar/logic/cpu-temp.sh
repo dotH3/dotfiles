@@ -17,7 +17,7 @@ if [ "$temperature" -gt "$maxTemp" ] 2>/dev/null; then
 fi
 
 # text="$icon ${temperature}°C"
-text="TMP:${temperature}°C |"
+text="TMP:${temperature}°C"
 # text="$text | Fan: ${fan_usage_percent}%"
 alt="CPU: %${usage}"
 
