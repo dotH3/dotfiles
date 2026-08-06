@@ -37,7 +37,7 @@ exec_always killall -q waybar; exec waybar
 exec_always killall -q nm-applet; exec nm-applet --indicator
 
 # Arrancar mako (notificaciones)
-exec_always killall -q mako; mako & sleep 1; notify-send "Bienvenido" "asdf"
+exec_always killall -q mako; mako & sleep 1; notify-send "hey, hii" "lets code :)"
 
 ### Output configuration
 #
@@ -74,6 +74,9 @@ output HDMI-A-2 resolution 1920x1080 position 1920,0
 #       natural_scroll enabled
 #       middle_emulation enabled
 #   }
+input type:keyboard {
+    xkb_layout "us,es"
+}
 #
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
@@ -95,6 +98,9 @@ seat seat0 xcursor_theme Adwaita 24
 
     # Start your launcher
     bindsym $mod+space exec $menu
+
+    # Change keyboard language
+    bindsym $mod+F2 input type:keyboard xkb_switch_layout next
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.

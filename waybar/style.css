@@ -15,7 +15,7 @@ window#waybar {
 }
 
 window#waybar.hidden {
-    opacity: 0.2;
+    opacity: 0.9;
 }
 
 /*
@@ -86,6 +86,7 @@ button:hover {
 #wireplumber,
 #custom-media,
 #custom-docker,
+#custom-reload,
 #tray,
 #mode,
 #idle_inhibitor,
@@ -209,6 +210,11 @@ label:focus {
     min-width: 100px;
 }
 
+#custom-reload {
+    background-color: yellow;
+    color: black
+}
+
 #custom-docker {
     background-color: lightskyblue;
 }
@@ -230,7 +236,7 @@ label:focus {
 }
 
 #tray {
-    background-color: #2980b9;
+    background-color: darkslategray;
 }
 
 #tray > .passive {
@@ -272,7 +278,7 @@ label:focus {
     background: #00b093;
     color: #740864;
     padding: 0 5px;
-    margin: 0 5px;
+    /*margin: 0 5px;*/
     min-width: 16px;
 }
 
@@ -280,7 +286,7 @@ label:focus {
     background: #97e1ad;
     color: #000000;
     padding: 0 0px;
-    margin: 0 5px;
+    /*margin: 0 5px;*/
     min-width: 16px;
 }
 
