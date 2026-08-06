@@ -102,6 +102,9 @@ seat seat0 xcursor_theme Adwaita 24
     # Change keyboard language
     bindsym $mod+F2 input type:keyboard xkb_switch_layout next
 
+    # Screenshot
+    bindsym Print exec grim -g "$(slurp)" - | wl-copy
+
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
     # Despite the name, also works for non-floating windows.
