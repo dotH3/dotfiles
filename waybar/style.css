@@ -211,12 +211,29 @@ label:focus {
 }
 
 #custom-reload {
-    background-color: yellow;
-    color: black
+    background-color: lightskyblue;
+    /*color: black*/
 }
 
 #custom-docker {
-    background-color: lightskyblue;
+    background-color: #64727D;
+}
+
+#custom-docker.running {
+    background-color: #2496ed;
+}
+
+#custom-docker.stopped {
+    background-color: #64727D;
+}
+
+#custom-docker.starting,
+#custom-docker.stopping {
+    background-color: #f0932b;
+}
+
+#custom-docker.error {
+    background-color: #f53c3c;
 }
 
 #custom-media.custom-spotify {
