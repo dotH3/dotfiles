@@ -84,14 +84,13 @@ button:hover {
 #network,
 #pulseaudio,
 #wireplumber,
-#custom-media,
 #custom-docker,
 #custom-reload,
+#custom-power,
 #tray,
 #mode,
 #idle_inhibitor,
-#scratchpad,
-#mpd {
+#scratchpad {
     padding: 0 10px;
     color: #ffffff;
 }
@@ -204,15 +203,50 @@ label:focus {
     background-color: #f53c3c;
 }
 
-#custom-media {
+/* group/media: los tres módulos comparten fondo y van pegados (el box del
+   group tiene spacing 0) para que se lean como un solo bloque */
+#custom-media,
+#custom-media-prev,
+#custom-media-next {
     background-color: #66cc99;
     color: #2a5c45;
+}
+
+#custom-media {
+    padding: 0 6px;
     min-width: 100px;
+}
+
+#custom-media-prev,
+#custom-media-next {
+    padding: 0 9px;
+}
+
+#custom-media.paused,
+#custom-media-prev.paused,
+#custom-media-next.paused {
+    background-color: #51a37a;
+    color: #d7f0e3;
+}
+
+#custom-media:hover,
+#custom-media-prev:hover,
+#custom-media-next:hover {
+    background-color: #7ad6aa;
 }
 
 #custom-reload {
     background-color: lightskyblue;
     /*color: black*/
+}
+
+#custom-power {
+    background-color: #f53c3c;
+    color: #ffffff;
+}
+
+#custom-power:hover {
+    background-color: #eb4d4b;
 }
 
 #custom-docker {
@@ -234,14 +268,6 @@ label:focus {
 
 #custom-docker.error {
     background-color: #f53c3c;
-}
-
-#custom-media.custom-spotify {
-    background-color: #66cc99;
-}
-
-#custom-media.custom-vlc {
-    background-color: #ffa000;
 }
 
 #temperature {
@@ -272,23 +298,6 @@ label:focus {
 #idle_inhibitor.activated {
     background-color: #ecf0f1;
     color: #2d3436;
-}
-
-#mpd {
-    background-color: #66cc99;
-    color: #2a5c45;
-}
-
-#mpd.disconnected {
-    background-color: #f53c3c;
-}
-
-#mpd.stopped {
-    background-color: #90b1b1;
-}
-
-#mpd.paused {
-    background-color: #51a37a;
 }
 
 #language {
