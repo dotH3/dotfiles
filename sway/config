@@ -30,14 +30,24 @@ exec systemctl --user import-environment XDG_CURRENT_DESKTOP
 exec hash dbus-update-activation-environment 2>/dev/null && \
         dbus-update-activation-environment --systemd XDG_CURRENT_DESKTOP
 
-# Arrancar waybar (mata instancias previas para evitar duplicados en cada reload)
-exec_always killall -q waybar; exec waybar
+# Ojo con las comillas: sway parte la línea en cada ";" y la trata como otro
+# comando suyo, no como shell. Sin comillas, "exec_always killall -q X; exec X"
+# quedaba en dos comandos: el killall (que corre en cada reload) y un exec (que
+# solo corre al arrancar la sesión). O sea que cada reload mataba el proceso y
+# no lo levantaba de nuevo. Entre comillas va todo junto a sh -c, como se quiere.
+
+# Arrancar waybar (mata instancias previas para evitar duplicados en cada reload).
+# El pkill barre los módulos continuos, que no se mueren solos con waybar: se
+# quedan bloqueados leyendo cava sin escribir nada, así que nunca les llega el
+# EPIPE. El patrón va con [.] a propósito, para que el pkill no matche su propia
+# línea de comando (o sea, este mismo sh) y se suicide antes del exec.
+exec_always "killall -q waybar; pkill -f 'media-cava[.]sh'; pkill -f 'waybar/cava[.]conf'; exec waybar"
 
 # Arrancar applet de NetworkManager (VPN, wifi) en la bandeja de waybar
-exec_always killall -q nm-applet; exec nm-applet --indicator
+exec_always "killall -q nm-applet; exec nm-applet --indicator"
 
 # Arrancar mako (notificaciones)
-exec_always killall -q mako; mako & sleep 1; notify-send "hey, hii" "lets code :)"
+exec_always "killall -q mako; mako & sleep 1; notify-send 'hey, hii' 'lets code :)'"
 
 ### Output configuration
 #

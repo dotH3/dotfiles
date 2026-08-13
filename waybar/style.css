@@ -207,9 +207,19 @@ label:focus {
    group tiene spacing 0) para que se lean como un solo bloque */
 #custom-media,
 #custom-media-prev,
-#custom-media-next {
+#custom-media-next,
+#custom-cava {
     background-color: #66cc99;
     color: #2a5c45;
+}
+
+/* Visualizador: ancho fijo para las 10 barras, si no el bloque cambia de tamaño
+   con cada frame y le mueve el reloj de al lado (está en modules-center) */
+#custom-cava {
+    padding: 0 6px;
+    min-width: 78px;
+    font-family: monospace;
+    letter-spacing: 1px;
 }
 
 #custom-media {

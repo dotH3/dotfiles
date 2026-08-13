@@ -6,7 +6,7 @@
     "spacing": 4, // Gaps between modules (4px)
     // Choose the order of the modules
     "modules-left": ["sway/workspaces", "sway/mode", "sway/scratchpad"],
-    "modules-center": ["sway/window", "clock", "group/media"],
+    "modules-center": ["sway/window_OFF", "clock", "group/media"],
     "modules-right": ["idle_inhibitor_OFF", "pulseaudio", "network_OFF", "custom/vpn", "custom/docker", "cpu", "memory", "temperature", "backlight", "keyboard-state", "sway/language", "battery", "battery#bat2", "custom/reload", "custom/power", "tray"],
     // Modules configuration
     // "sway/workspaces": {
@@ -160,7 +160,7 @@
     },
     "group/media": {
         "orientation": "horizontal",
-        "modules": ["custom/media-prev", "custom/media", "custom/media-next"]
+        "modules": ["custom/media-prev", "custom/media", "custom/cava", "custom/media-next"]
     },
     "custom/media": {
         "exec": "$HOME/.config/waybar/media-status.sh title",
@@ -179,6 +179,12 @@
         "signal": 10,
         "on-click": "$HOME/.config/waybar/media-ctl.sh previous",
         "tooltip": true
+    },
+    "custom/cava": {
+        // Sin "interval": salida continua, waybar lee una línea por frame
+        "exec": "$HOME/.config/waybar/media-cava.sh",
+        "restart-interval": 5,
+        "tooltip": false
     },
     "custom/media-next": {
         "exec": "$HOME/.config/waybar/media-status.sh next",
