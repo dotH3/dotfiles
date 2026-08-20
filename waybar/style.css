@@ -170,6 +170,12 @@ label:focus {
     background-color: #f53c3c;
 }
 
+#custom-mic {
+    padding: 0 4px;
+    font-size: 10px;
+    color: #f53c3c;
+}
+
 #custom-vpn {
     padding: 0 10px;
     color: #ffffff;
