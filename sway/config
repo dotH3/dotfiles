@@ -281,6 +281,10 @@ default_border pixel 2
 # Las flotantes sí muestran la barra, para distinguirlas de un vistazo.
 default_floating_border normal
 
+# Texto de la barrita en itálica (necesita el prefijo pango: para que sway
+# respete el estilo Italic en vez de solo tratarlo como parte del nombre).
+font pango:monospace Italic 10
+
 # Barrita de título sin fondo ni borde propio (el 1er y 2do valor van con
 # alpha 00): así solo queda visible el "child_border", que es el marco que
 # rodea toda la ventana (el que sí queremos conservar). Formato:
