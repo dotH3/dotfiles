@@ -49,10 +49,10 @@ exec_always "killall -q nm-applet; exec nm-applet --indicator"
 # Arrancar mako (notificaciones)
 exec_always "killall -q mako; mako & sleep 1; notify-send 'hey, hii' 'lets code :)'"
 
-# Arrancar plank (dock). Corre sobre XWayland, por eso el rule más abajo matchea
-# por class y no por app_id. El script se encarga del env X11 que plank exige,
-# de su matcher (bamfdaemon) y de posicionarlo abajo.
-exec_always ~/dotfiles/scripts/plank-launch.sh
+# Plank (dock) deshabilitado: en Sway (Wayland puro) bamf no puede mostrar el
+# indicador de "app abierta" para ventanas xdg_shell nativas, solo para las que
+# corren por XWayland. Config y script quedan intactos por si se retoma.
+# exec_always ~/dotfiles/scripts/plank-launch.sh
 
 ### Output configuration
 #

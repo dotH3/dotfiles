@@ -99,7 +99,7 @@ button:hover {
 /* ── Workspaces ─────────────────────────────────────────────────────────────
    El activo se marca con un subrayado de acento, no con un bloque de fondo. */
 #workspaces button {
-    padding: 0 8px;
+    padding: 0 3px;
     background: transparent;
     color: @overlay0;
 }
