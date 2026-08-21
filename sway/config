@@ -49,6 +49,11 @@ exec_always "killall -q nm-applet; exec nm-applet --indicator"
 # Arrancar mako (notificaciones)
 exec_always "killall -q mako; mako & sleep 1; notify-send 'hey, hii' 'lets code :)'"
 
+# Arrancar plank (dock). Corre sobre XWayland, por eso el rule más abajo matchea
+# por class y no por app_id. El script se encarga del env X11 que plank exige,
+# de su matcher (bamfdaemon) y de posicionarlo abajo.
+exec_always ~/dotfiles/scripts/plank-launch.sh
+
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
@@ -270,5 +275,17 @@ bindsym $mod+r mode "resize"
 #         inactive_workspace #32323200 #32323200 #5c5c5c
 #     }
 # }
+
+### Dock (plank)
+#
+# Plank corre bajo XWayland, así que matchea por class en vez de app_id.
+for_window [class="Plank"] {
+    floating enable
+    border none
+    no_focus
+    # Sin sticky el dock es una ventana flotante común y se queda en el workspace
+    # donde nació en vez de seguirte.
+    sticky enable
+}
 
 include /etc/sway/config.d/*

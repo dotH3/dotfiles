@@ -1,0 +1,5 @@
+[docks/dock1]
+dock-items=['org.gnome.TextEditor.dockitem', 'com.google.Chrome.dockitem']
+hide-mode='auto'
+zoom-enabled=true
+zoom-percent=175

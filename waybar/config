@@ -5,7 +5,7 @@
     // "width": 1280, // Waybar width
     "spacing": 0, // Sin hueco: los separadores finos del CSS marcan el ritmo
     // Choose the order of the modules
-    "modules-left": ["sway/workspaces", "sway/mode", "sway/scratchpad"],
+    "modules-left": ["sway/workspaces", "custom/mic", "sway/mode", "sway/scratchpad"],
     "modules-center": ["sway/window_OFF", "clock", "group/media"],
     "modules-right": ["idle_inhibitor_OFF", "pulseaudio", "network_OFF", "custom/vpn", "custom/docker", "cpu", "memory", "temperature", "backlight", "keyboard-state", "sway/language", "battery", "custom/reload", "custom/power", "tray"],
     // Modules configuration
@@ -147,6 +147,13 @@
         "interval": 15,
         "signal": 8,
         "on-click": "$HOME/.config/waybar/vpn-toggle.sh",
+        "tooltip": true
+    },
+    "custom/mic": {
+        "exec-if": "$HOME/.config/waybar/mic-status.sh check",
+        "exec": "$HOME/.config/waybar/mic-status.sh",
+        "return-type": "json",
+        "interval": 1,
         "tooltip": true
     },
     "group/media": {
