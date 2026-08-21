@@ -52,7 +52,7 @@ exec_always "killall -q mako; mako & sleep 1; notify-send 'hey, hii' 'lets code 
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg ~/Pictures/animals.png fill
+output * bg ~/dotfiles/wallpapers/rei.jpg fill
 #
 # Example configuration:
 #
