@@ -1,13 +1,13 @@
 {
     // "layer": "top", // Waybar at top layer
     // "position": "bottom", // Waybar position (top|bottom|left|right)
-    "height": 30, // Waybar height (to be removed for auto height)
+    "height": 32, // Waybar height (to be removed for auto height)
     // "width": 1280, // Waybar width
-    "spacing": 4, // Gaps between modules (4px)
+    "spacing": 0, // Sin hueco: los separadores finos del CSS marcan el ritmo
     // Choose the order of the modules
-    "modules-left": ["sway/workspaces", "custom/mic", "sway/mode", "sway/scratchpad"],
+    "modules-left": ["sway/workspaces", "sway/mode", "sway/scratchpad"],
     "modules-center": ["sway/window_OFF", "clock", "group/media"],
-    "modules-right": ["idle_inhibitor_OFF", "pulseaudio", "network_OFF", "custom/vpn", "custom/docker", "cpu", "memory", "temperature", "backlight", "keyboard-state", "sway/language", "battery", "battery#bat2", "custom/reload", "custom/power", "tray"],
+    "modules-right": ["idle_inhibitor_OFF", "pulseaudio", "network_OFF", "custom/vpn", "custom/docker", "cpu", "memory", "temperature", "backlight", "keyboard-state", "sway/language", "battery", "custom/reload", "custom/power", "tray"],
     // Modules configuration
     // "sway/workspaces": {
     //     "disable-scroll": true,
@@ -30,8 +30,8 @@
         "capslock": true,
         "format": "{name} {icon}",
         "format-icons": {
-            "locked": "",
-            "unlocked": ""
+            "locked": "󰌾",
+            "unlocked": "󰿆"
         }
     },
     "sway/mode": {
@@ -40,15 +40,15 @@
     "sway/scratchpad": {
         "format": "{icon} {count}",
         "show-empty": false,
-        "format-icons": ["", ""],
+        "format-icons": ["", "󰍹"],
         "tooltip": true,
         "tooltip-format": "{app}: {title}"
     },
     "idle_inhibitor": {
         "format": "{icon}",
         "format-icons": {
-            "activated": "",
-            "deactivated": ""
+            "activated": "󰈈",
+            "deactivated": "󰈉"
         }
     },
     "tray": {
@@ -62,11 +62,11 @@
         "format-alt": "{:%A, %d %B %Y  %H:%M:%S}"
     },
     "cpu": {
-        "format": "{usage}% ",
+        "format": "{usage}% 󰻠",
         "tooltip": false
     },
     "memory": {
-        "format": "{}% 󱔼"
+        "format": "{}% 󰍛"
     },
     "temperature": {
         // "thermal-zone": 2,
@@ -74,12 +74,12 @@
         "critical-threshold": 80,
         // "format-critical": "{temperatureC}°C {icon}",
         "format": "{temperatureC}°C {icon}",
-        "format-icons": ["", "", ""]
+        "format-icons": ["󰔏"]
     },
     "backlight": {
         // "device": "acpi_video1",
         "format": "{percent}% {icon}",
-        "format-icons": ["", "", "", "", "", "", "", "", ""]
+        "format-icons": ["󰃞", "󰃟", "󰃠"]
     },
     "battery": {
         "states": {
@@ -88,41 +88,38 @@
             "critical": 15
         },
         "format": "{capacity}% {icon}",
-        "format-charging": "{capacity}% ",
-        "format-plugged": "{capacity}% ",
+        "format-charging": "{capacity}% 󰂄",
+        "format-plugged": "{capacity}% 󰚥",
         "format-alt": "{time} {icon}",
         // "format-good": "", // An empty format will hide the module
         // "format-full": "",
-        "format-icons": ["", "", "", "", ""]
-    },
-    "battery#bat2": {
-        "bat": "BAT2"
+        "format-icons": ["󰁺", "󰁼", "󰁾", "󰂀", "󰂂"]
     },
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
-        "format-wifi": "{essid} ({signalStrength}%) ",
-        "format-ethernet": "{ipaddr}/{cidr} ",
-        "tooltip-format": "{ifname} via {gwaddr} ",
-        "format-linked": "{ifname} (No IP) ",
-        "format-disconnected": "Disconnected ⚠",
+        "format-wifi": "{essid} ({signalStrength}%) 󰖩",
+        "format-ethernet": "{ipaddr}/{cidr} 󰈀",
+        "tooltip-format": "{ifname} via {gwaddr} 󰈀",
+        "format-linked": "{ifname} (No IP) 󰈀",
+        "format-disconnected": "Disconnected 󰖪",
         "format-alt": "{ifname}: {ipaddr}/{cidr}"
     },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
-        "format": "{volume}% {icon} {format_source}",
+        "format": "{volume}% {icon}",
         "format-bluetooth": "{volume}% {icon} {format_source}",
-        "format-bluetooth-muted": " {icon} {format_source}",
-        "format-muted": " {format_source}",
-        "format-source": "{volume}% ",
-        "format-source-muted": "",
+        "format-bluetooth-muted": "󰝟 {icon} {format_source}",
+        "format-muted": "󰝟 {format_source}",
+        "format-source": "󰍬",
+        "format-source-muted": "󰍭",
         "format-icons": {
-            "headphone": "",
-            "hands-free": "",
-            "headset": "",
-            "phone": "",
-            "portable": "",
-            "car": "",
-            "default": ["", "", ""]
+            "headphone": "󰋋",
+            "hands-free": "󰋋",
+            "headset": "󰋋",
+            "phone": "󰄜",
+            "portable": "󰄜",
+            "car": "󰄋",
+            "default": ["󰕿", "󰖀", "󰕾"]
         },
         "on-click": "pavucontrol"
     },
@@ -131,7 +128,7 @@
         "on-click": "killall waybar; setsid waybar > /dev/null 2>&1 & swaymsg reload;"
     },
     "custom/power": {
-        "format": "⏻",
+        "format": "󰐥",
         "tooltip": true,
         "tooltip-format": "Power menu (shutdown / restart / suspend / log out)",
         "on-click": "$HOME/.config/waybar/power-menu.sh"
@@ -144,26 +141,12 @@
         "on-click": "$HOME/.config/waybar/docker-toggle.sh",
         "tooltip": true
     },
-    "custom/lang-toggle": {
-        "exec": "$HOME/.config/waybar/vpn-status.sh",
-        "return-type": "json",
-        "signal": 8,
-        "on-click": "$HOME/.config/waybar/vpn-toggle.sh",
-        "tooltip": true
-    },
     "custom/vpn": {
         "exec": "$HOME/.config/waybar/vpn-status.sh",
         "return-type": "json",
         "interval": 15,
         "signal": 8,
         "on-click": "$HOME/.config/waybar/vpn-toggle.sh",
-        "tooltip": true
-    },
-    "custom/mic": {
-        "exec-if": "$HOME/.config/waybar/mic-status.sh check",
-        "exec": "$HOME/.config/waybar/mic-status.sh",
-        "return-type": "json",
-        "interval": 1,
         "tooltip": true
     },
     "group/media": {

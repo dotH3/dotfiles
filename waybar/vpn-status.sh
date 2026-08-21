@@ -2,8 +2,8 @@
 # Reporta el estado de la VPN "Chemes" en formato JSON para waybar (custom/vpn)
 
 VPN_NAME="Chemes"
-LOCKED=$''   # fa-lock
-UNLOCKED=$'' # fa-unlock
+LOCKED=$'\U000F033E'   # md-lock
+UNLOCKED=$'\U000F0FC6' # md-lock-open-variant
 
 if nmcli -t -f NAME,TYPE connection show --active | grep -qF "${VPN_NAME}:vpn"; then
     echo "{\"text\":\"${LOCKED} VPN\",\"tooltip\":\"VPN conectada ($VPN_NAME) - click para desconectar\",\"class\":\"connected\"}"

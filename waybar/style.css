@@ -1,15 +1,31 @@
+/* Paleta única (Catppuccin Mocha). El color NO separa módulos —
+   eso lo hacen los separadores finos— sino que señala estado.
+   Para cambiar el tema basta con tocar estas diez líneas. */
+@define-color base     #1e1e2e;  /* fondo de la barra */
+@define-color surface0 #313244;  /* separadores, hover */
+@define-color surface1 #45475a;  /* borde inferior */
+@define-color overlay0 #6c7086;  /* apagado / muteado */
+@define-color subtext  #a6adc8;  /* texto e iconos normales */
+@define-color text     #cdd6f4;  /* énfasis */
+@define-color accent   #89b4fa;  /* activo */
+@define-color ok       #a6e3a1;  /* cargando / correcto */
+@define-color warn     #f9e2af;  /* advertencia */
+@define-color crit     #f38ba8;  /* crítico */
+
 * {
-    /* Symbols Nerd Font (nerdfonts.com) provides most icons; FontAwesome stays as
-       fallback for a handful of FA5-only glyphs (battery-charging, thermometer,
-       network-wired, headset) that Nerd Fonts' PUA map doesn't cover yet */
-    font-family: "Symbols Nerd Font", FontAwesome, Roboto, Helvetica, Arial, sans-serif;
+    /* Symbols Nerd Font cubre todos los glifos usados (rango Material Design
+       U+F0000+); Noto Sans va primero para dígitos y latín. FontAwesome y
+       Roboto estaban aquí pero no están instalados en el sistema. */
+    font-family: "Noto Sans", "Symbols Nerd Font", sans-serif;
     font-size: 13px;
+    min-height: 0;
+    color: @subtext;
 }
 
 window#waybar {
-    background-color: rgba(43, 48, 59, 0.5);
-    border-bottom: 3px solid rgba(100, 114, 125, 0.5);
-    color: #ffffff;
+    background: @base;
+    border-bottom: 1px solid @surface1;
+    color: @subtext;
     transition-property: background-color;
     transition-duration: .5s;
 }
@@ -18,28 +34,9 @@ window#waybar.hidden {
     opacity: 0.9;
 }
 
-/*
-window#waybar.empty {
-    background-color: transparent;
-}
-window#waybar.solo {
-    background-color: #FFFFFF;
-}
-*/
-
-window#waybar.termite {
-    background-color: #3F3F3F;
-}
-
-window#waybar.chromium {
-    background-color: #000000;
-    border: none;
-}
-
 button {
     /* Use box-shadow instead of border so the text isn't offset */
-    box-shadow: inset 0 -3px transparent;
-    /* Avoid rounded borders under each button name */
+    box-shadow: inset 0 -2px transparent;
     border: none;
     border-radius: 0;
 }
@@ -47,52 +44,41 @@ button {
 /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
 button:hover {
     background: inherit;
-    box-shadow: inset 0 -3px #ffffff;
+    box-shadow: inset 0 -2px @surface1;
 }
 
-#workspaces button {
-    padding: 0 5px;
-    background-color: transparent;
-    color: #ffffff;
-}
-
-#workspaces button:hover {
-    background: rgba(0, 0, 0, 0.2);
-}
-
-#workspaces button.focused {
-    background-color: #64727D;
-    box-shadow: inset 0 -3px #ffffff;
-}
-
-#workspaces button.urgent {
-    background-color: #eb4d4b;
-}
-
-#mode {
-    background-color: #64727D;
-    border-bottom: 3px solid #ffffff;
-}
-
+/* ── Métrica común ──────────────────────────────────────────────────────────
+   Un solo bloque de padding para todo; ningún módulo lleva fondo propio. */
 #clock,
 #battery,
 #cpu,
 #memory,
-#disk,
 #temperature,
 #backlight,
 #network,
 #pulseaudio,
-#wireplumber,
+#custom-vpn,
 #custom-docker,
 #custom-reload,
 #custom-power,
 #tray,
 #mode,
 #idle_inhibitor,
-#scratchpad {
+#scratchpad,
+#language,
+#keyboard-state {
     padding: 0 10px;
-    color: #ffffff;
+    background: transparent;
+}
+
+/* Separadores finos entre los módulos de la derecha: sustituyen a los antiguos
+   bloques de color como marca de límite. El primero no lleva. */
+.modules-right > widget > * {
+    border-left: 1px solid @surface0;
+}
+
+.modules-right > widget:first-child > * {
+    border-left: none;
 }
 
 #window,
@@ -110,113 +96,124 @@ button:hover {
     margin-right: 0;
 }
 
+/* ── Workspaces ─────────────────────────────────────────────────────────────
+   El activo se marca con un subrayado de acento, no con un bloque de fondo. */
+#workspaces button {
+    padding: 0 8px;
+    background: transparent;
+    color: @overlay0;
+}
+
+#workspaces button:hover {
+    background: @surface0;
+    color: @text;
+}
+
+#workspaces button.focused,
+#workspaces button.active {
+    color: @text;
+    box-shadow: inset 0 -2px @accent;
+}
+
+#workspaces button.urgent {
+    color: @crit;
+    box-shadow: inset 0 -2px @crit;
+}
+
+#mode {
+    color: @warn;
+    box-shadow: inset 0 -2px @warn;
+}
+
 #clock {
-    background-color: #64727D;
+    color: @text;
 }
 
-#battery {
-    background-color: #ffffff;
-    color: #000000;
+/* ── Estados ────────────────────────────────────────────────────────────────
+   Lo único de la barra que lleva color. */
+#battery.warning:not(.charging) {
+    color: @warn;
 }
 
-#battery.charging, #battery.plugged {
-    color: #ffffff;
-    background-color: #26A65B;
+#battery.charging,
+#battery.plugged {
+    color: @ok;
 }
 
+/* Parpadeo por opacidad en vez de invertir el fondo: mantiene la barra plana */
 @keyframes blink {
     to {
-        background-color: #ffffff;
-        color: #000000;
+        opacity: 0.3;
     }
 }
 
 #battery.critical:not(.charging) {
-    background-color: #f53c3c;
-    color: #ffffff;
+    color: @crit;
     animation-name: blink;
-    animation-duration: 0.5s;
+    animation-duration: 0.8s;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
     animation-direction: alternate;
 }
 
-label:focus {
-    background-color: #000000;
-}
-
-#cpu {
-    background-color: #2ecc71;
-    color: #000000;
-}
-
-#memory {
-    background-color: #9b59b6;
-}
-
-#disk {
-    background-color: #964B00;
-}
-
-#backlight {
-    background-color: #90b1b1;
-}
-
-#network {
-    background-color: #2980b9;
-}
-
-#network.disconnected {
-    background-color: #f53c3c;
-}
-
-#custom-mic {
-    padding: 0 4px;
-    font-size: 10px;
-    color: #f53c3c;
-}
-
-#custom-vpn {
-    padding: 0 10px;
-    color: #ffffff;
-    background-color: #64727D;
-}
-
-#custom-vpn.connected {
-    background-color: #26A65B;
-}
-
-#custom-vpn.disconnected {
-    background-color: #64727D;
-}
-
-#pulseaudio {
-    background-color: #f1c40f;
-    color: #000000;
+#temperature.critical {
+    color: @crit;
 }
 
 #pulseaudio.muted {
-    background-color: #90b1b1;
-    color: #2a5c45;
+    color: @overlay0;
 }
 
-#wireplumber {
-    background-color: #fff0f5;
-    color: #000000;
+#network.disconnected {
+    color: @crit;
 }
 
-#wireplumber.muted {
-    background-color: #f53c3c;
+#custom-vpn.connected {
+    color: @accent;
 }
 
-/* group/media: los tres módulos comparten fondo y van pegados (el box del
-   group tiene spacing 0) para que se lean como un solo bloque */
+#custom-vpn.disconnected {
+    color: @overlay0;
+}
+
+#custom-docker.running {
+    color: @accent;
+}
+
+#custom-docker.starting,
+#custom-docker.stopping {
+    color: @warn;
+}
+
+#custom-docker.error {
+    color: @crit;
+}
+
+#custom-docker.stopped {
+    color: @overlay0;
+}
+
+#custom-reload:hover {
+    color: @accent;
+}
+
+#custom-power:hover {
+    color: @crit;
+}
+
+#idle_inhibitor.activated {
+    color: @accent;
+}
+
+/* ── group/media ────────────────────────────────────────────────────────────
+   Los cuatro módulos van pegados (el box del group tiene spacing 0) y se leen
+   como un solo bloque gracias al color común, ya no a un fondo compartido. */
 #custom-media,
 #custom-media-prev,
 #custom-media-next,
 #custom-cava {
-    background-color: #66cc99;
-    color: #2a5c45;
+    background: transparent;
+    color: @subtext;
 }
 
 /* Visualizador: ancho fijo para las 10 barras, si no el bloque cambia de tamaño
@@ -226,11 +223,13 @@ label:focus {
     min-width: 78px;
     font-family: monospace;
     letter-spacing: 1px;
+    color: @accent;
 }
 
 #custom-media {
     padding: 0 6px;
     min-width: 100px;
+    color: @text;
 }
 
 #custom-media-prev,
@@ -240,110 +239,51 @@ label:focus {
 
 #custom-media.paused,
 #custom-media-prev.paused,
-#custom-media-next.paused {
-    background-color: #51a37a;
-    color: #d7f0e3;
+#custom-media-next.paused,
+#custom-cava.paused {
+    color: @overlay0;
 }
 
 #custom-media:hover,
 #custom-media-prev:hover,
 #custom-media-next:hover {
-    background-color: #7ad6aa;
+    color: @accent;
 }
 
-#custom-reload {
-    background-color: lightskyblue;
-    /*color: black*/
-}
-
-#custom-power {
-    background-color: #f53c3c;
-    color: #ffffff;
-}
-
-#custom-power:hover {
-    background-color: #eb4d4b;
-}
-
-#custom-docker {
-    background-color: #64727D;
-}
-
-#custom-docker.running {
-    background-color: #2496ed;
-}
-
-#custom-docker.stopped {
-    background-color: #64727D;
-}
-
-#custom-docker.starting,
-#custom-docker.stopping {
-    background-color: #f0932b;
-}
-
-#custom-docker.error {
-    background-color: #f53c3c;
-}
-
-#temperature {
-    background-color: #f0932b;
-}
-
-#temperature.critical {
-    background-color: #eb4d4b;
-}
-
-#tray {
-    background-color: chocolate;
-}
-
+/* ── Tray ───────────────────────────────────────────────────────────────────*/
 #tray > .passive {
     -gtk-icon-effect: dim;
 }
 
 #tray > .needs-attention {
     -gtk-icon-effect: highlight;
-    background-color: #eb4d4b;
+    color: @crit;
 }
 
-#idle_inhibitor {
-    background-color: #2d3436;
-}
-
-#idle_inhibitor.activated {
-    background-color: #ecf0f1;
-    color: #2d3436;
-}
-
+/* ── Teclado ────────────────────────────────────────────────────────────────*/
 #language {
-    background: #00b093;
-    color: #740864;
-    padding: 0 5px;
-    /*margin: 0 5px;*/
+    padding: 0 8px;
     min-width: 16px;
 }
 
 #keyboard-state {
-    background: #97e1ad;
-    color: #000000;
-    padding: 0 0px;
-    /*margin: 0 5px;*/
+    padding: 0;
     min-width: 16px;
 }
 
 #keyboard-state > label {
-    padding: 0 5px;
+    padding: 0 6px;
+    color: @overlay0;
 }
 
 #keyboard-state > label.locked {
-    background: rgba(0, 0, 0, 0.2);
+    color: @warn;
 }
 
 #scratchpad {
-    background: rgba(0, 0, 0, 0.2);
+    color: @overlay0;
 }
 
 #scratchpad.empty {
-	background-color: transparent;
+    background: transparent;
 }

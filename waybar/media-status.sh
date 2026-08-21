@@ -15,10 +15,10 @@ SEP=$'\x1f' # unit separator: no aparece en los metadatos y no lo colapsa IFS
 
 # Los glifos van como escapes para que no dependan del editor. Misma familia
 # FontAwesome que usaba el módulo mpd, cubierta por el font stack de style.css
-PLAY=$'\uF04B'  # fa-play
-PAUSE=$'\uF04C' # fa-pause
-PREV=$'\uF048'  # fa-step-backward
-NEXT=$'\uF051'  # fa-step-forward
+PLAY=$'\U000F040A'  # md-play
+PAUSE=$'\U000F03E4' # md-pause
+PREV=$'\U000F04AE'  # md-skip-previous
+NEXT=$'\U000F04AD'  # md-skip-next
 
 mode="${1:-title}"
 case "$mode" in
