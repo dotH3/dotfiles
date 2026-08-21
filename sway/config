@@ -214,7 +214,7 @@ seat seat0 xcursor_theme Adwaita 24
     bindsym $mod+f fullscreen
 
     # Toggle the current focus between tiling and floating mode
-    bindsym $mod+t floating toggle
+    bindsym $mod+t exec ~/dotfiles/scripts/floating-toggle-border.sh
 
     # Swap focus between the tiling area and the floating area
     # bindsym $mod+space focus mode_toggle
@@ -275,6 +275,19 @@ bindsym $mod+r mode "resize"
 #         inactive_workspace #32323200 #32323200 #5c5c5c
 #     }
 # }
+
+# Bordes de color sin la barrita de título (que come pantalla).
+default_border pixel 2
+# Las flotantes sí muestran la barra, para distinguirlas de un vistazo.
+default_floating_border normal
+
+# Barrita de título sin fondo ni borde propio (el 1er y 2do valor van con
+# alpha 00): así solo queda visible el "child_border", que es el marco que
+# rodea toda la ventana (el que sí queremos conservar). Formato:
+# client.<estado> <border> <background> <text> <indicator> <child_border>
+client.focused          #4c789900 #28557700 #ffffff #2e9ef4 #285577
+client.focused_inactive #33333300 #5f676a00 #ffffff #484e50 #5f676a
+client.unfocused        #33333300 #22222200 #888888 #292d2e #222222
 
 ### Dock (plank)
 #
