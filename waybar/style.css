@@ -51,6 +51,7 @@ button:hover {
    Un solo bloque de padding para todo; ningún módulo lleva fondo propio. */
 #clock,
 #battery,
+#power-profiles-daemon,
 #cpu,
 #memory,
 #temperature,

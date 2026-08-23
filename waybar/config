@@ -7,7 +7,7 @@
     // Choose the order of the modules
     "modules-left": ["sway/workspaces", "custom/mic", "sway/mode", "sway/scratchpad"],
     "modules-center": ["sway/window_OFF", "clock", "group/media"],
-    "modules-right": ["idle_inhibitor_OFF", "pulseaudio", "network_OFF", "custom/vpn", "custom/docker", "cpu", "memory", "temperature", "backlight", "keyboard-state", "sway/language", "battery", "custom/reload", "custom/power", "tray"],
+    "modules-right": ["idle_inhibitor_OFF", "pulseaudio", "network_OFF", "custom/vpn", "custom/docker", "cpu", "memory", "temperature", "backlight", "keyboard-state", "sway/language", "battery", "power-profiles-daemon", "custom/reload", "custom/power", "tray"],
     // Modules configuration
     // "sway/workspaces": {
     //     "disable-scroll": true,
@@ -94,6 +94,17 @@
         // "format-good": "", // An empty format will hide the module
         // "format-full": "",
         "format-icons": ["󰁺", "󰁼", "󰁾", "󰂀", "󰂂"]
+    },
+    "power-profiles-daemon": {
+        "format": "{icon}",
+        "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
+        "tooltip": true,
+        "format-icons": {
+            "default": "󰓅",
+            "performance": "󰓅",
+            "balanced": "󰗑",
+            "power-saver": "󰌪"
+        }
     },
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
