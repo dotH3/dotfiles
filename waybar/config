@@ -9,22 +9,40 @@
     "modules-center": ["sway/window_OFF", "clock", "group/media"],
     "modules-right": ["idle_inhibitor_OFF", "pulseaudio", "network_OFF", "custom/vpn", "custom/docker", "custom/ai", "cpu", "memory", "temperature", "backlight", "keyboard-state", "sway/language", "battery", "power-profiles-daemon", "custom/reload", "custom/power", "tray"],
     // Modules configuration
-    // "sway/workspaces": {
-    //     "disable-scroll": true,
-    //     "all-outputs": true,
-    //     "warp-on-scroll": false,
-    //     "format": "{name}: {icon}",
-    //     "format-icons": {
-    //         "1": "",
-    //         "2": "",
-    //         "3": "",
-    //         "4": "",
-    //         "5": "",
-    //         "urgent": "",
-    //         "focused": "",
-    //         "default": ""
-    //     }
-    // },
+    "sway/workspaces": {
+        "disable-scroll": true,
+        // Una sola lista completa en cada barra: con un unico monitor conectado
+        // los workspaces asignados al otro output seguirian ocultos si esto
+        // fuese false.
+        "all-outputs": true,
+        "warp-on-scroll": false,
+        // Los workspaces con letra se llaman "4:Q" en sway (el prefijo numerico
+        // es lo que fija el orden); aqui se muestra solo la letra.
+        "format": "{icon}",
+        "format-icons": {
+            "1": "1",
+            "2": "2",
+            "3": "3",
+            "4:Q": "Q",
+            "5:W": "W",
+            "6:E": "E",
+            "7:A": "A",
+            "8:S": "S"
+        },
+        // Los 8 siempre visibles. La lista vacia = en todas las salidas; los que
+        // no existen en sway (= vacios) reciben la clase .persistent y se pintan
+        // en gris desde style.css.
+        "persistent_workspaces": {
+            "1": [],
+            "2": [],
+            "3": [],
+            "4:Q": [],
+            "5:W": [],
+            "6:E": [],
+            "7:A": [],
+            "8:S": []
+        }
+    },
     "keyboard-state": {
         "numlock": true,
         "capslock": true,

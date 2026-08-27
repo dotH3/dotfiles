@@ -165,36 +165,39 @@ seat seat0 xcursor_theme Adwaita 24
 #
 # Workspaces:
 #
-    workspace 1 output $output-primary
-    workspace 2 output $output-secondary
-    workspace 3 output $output-primary
-    workspace Q output $output-secondary
-    workspace W output $output-primary
-    workspace E output $output-secondary
-    workspace A output $output-primary
-    workspace S output $output-secondary
+    # Los workspaces con letra llevan prefijo numerico ("4:Q") por dos razones:
+    # les da un "num" real, lo que permite usar "workspace number" en los binds,
+    # y fija el orden en waybar (que ordena por num; sin el, los workspaces con
+    # nombre salian en orden de creacion). La barra muestra solo la letra via
+    # format-icons en waybar/config.
+    workspace 1   output $output-primary
+    workspace 2   output $output-secondary
+    workspace 3   output $output-primary
+    workspace 4:Q output $output-secondary
+    workspace 5:W output $output-primary
+    workspace 6:E output $output-secondary
+    workspace 7:A output $output-primary
+    workspace 8:S output $output-secondary
 
     # Switch to workspace
     bindsym Alt+1 workspace number 1
     bindsym Alt+2 workspace number 2
     bindsym Alt+3 workspace number 3
-    # Los workspaces con nombre (letras) NO llevan "number": eso solo vale
-    # para workspaces numericos.
-    bindsym Alt+q workspace Q
-    bindsym Alt+w workspace W
-    bindsym Alt+e workspace E
-    bindsym Alt+a workspace A
-    bindsym Alt+s workspace S
+    bindsym Alt+q workspace number 4:Q
+    bindsym Alt+w workspace number 5:W
+    bindsym Alt+e workspace number 6:E
+    bindsym Alt+a workspace number 7:A
+    bindsym Alt+s workspace number 8:S
 
     # Move focused container to workspace
     bindsym Alt+Shift+1 move container to workspace number 1
     bindsym Alt+Shift+2 move container to workspace number 2
     bindsym Alt+Shift+3 move container to workspace number 3
-    bindsym Alt+Shift+q move container to workspace Q
-    bindsym Alt+Shift+w move container to workspace W
-    bindsym Alt+Shift+e move container to workspace E
-    bindsym Alt+Shift+a move container to workspace A
-    bindsym Alt+Shift+s move container to workspace S
+    bindsym Alt+Shift+q move container to workspace number 4:Q
+    bindsym Alt+Shift+w move container to workspace number 5:W
+    bindsym Alt+Shift+e move container to workspace number 6:E
+    bindsym Alt+Shift+a move container to workspace number 7:A
+    bindsym Alt+Shift+s move container to workspace number 8:S
 
     # Note: workspaces can have any name you want, not just numbers.
 
