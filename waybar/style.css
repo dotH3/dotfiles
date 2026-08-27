@@ -60,6 +60,7 @@ button:hover {
 #pulseaudio,
 #custom-vpn,
 #custom-docker,
+#custom-ai,
 #custom-reload,
 #custom-power,
 #tray,
@@ -199,6 +200,23 @@ button:hover {
 }
 
 #custom-docker.stopped {
+    color: @overlay0;
+}
+
+/* Cuota de IA: verde mientras sobra, ámbar bajo 30%, rojo bajo 10% */
+#custom-ai.ok {
+    color: @accent;
+}
+
+#custom-ai.warning {
+    color: @warn;
+}
+
+#custom-ai.critical {
+    color: @crit;
+}
+
+#custom-ai.error {
     color: @overlay0;
 }
 

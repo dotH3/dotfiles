@@ -7,7 +7,7 @@
     // Choose the order of the modules
     "modules-left": ["sway/workspaces", "custom/mic", "sway/mode", "sway/scratchpad"],
     "modules-center": ["sway/window_OFF", "clock", "group/media"],
-    "modules-right": ["idle_inhibitor_OFF", "pulseaudio", "network_OFF", "custom/vpn", "custom/docker", "cpu", "memory", "temperature", "backlight", "keyboard-state", "sway/language", "battery", "power-profiles-daemon", "custom/reload", "custom/power", "tray"],
+    "modules-right": ["idle_inhibitor_OFF", "pulseaudio", "network_OFF", "custom/vpn", "custom/docker", "custom/ai", "cpu", "memory", "temperature", "backlight", "keyboard-state", "sway/language", "battery", "power-profiles-daemon", "custom/reload", "custom/power", "tray"],
     // Modules configuration
     // "sway/workspaces": {
     //     "disable-scroll": true,
@@ -158,6 +158,15 @@
         "interval": 15,
         "signal": 8,
         "on-click": "$HOME/.config/waybar/vpn-toggle.sh",
+        "tooltip": true
+    },
+    "custom/ai": {
+        // Cuota restante de OpenCode Go y Claude Code; el script cachea 45s
+        "exec": "$HOME/.config/waybar/ai-status.sh",
+        "return-type": "json",
+        "interval": 60,
+        "signal": 11,
+        "on-click": "rm -f /tmp/waybar-ai-status.cache; pkill -RTMIN+11 waybar",
         "tooltip": true
     },
     "custom/mic": {
