@@ -17,17 +17,19 @@
         "all-outputs": true,
         "warp-on-scroll": false,
         // Los workspaces con letra se llaman "4:Q" en sway (el prefijo numerico
-        // es lo que fija el orden); aqui se muestra solo la letra.
+        // es lo que fija el orden). En vez de mostrar numero/letra, cada
+        // workspace muestra un icono Nerd Font como identidad. Ajusta los
+        // glifos a gusto (simbolos de Symbols Nerd Font).
         "format": "{icon}",
         "format-icons": {
-            "1": "1",
-            "2": "2",
-            "3": "3",
-            "4:Q": "Q",
-            "5:W": "W",
-            "6:E": "E",
-            "7:A": "A",
-            "8:S": "S"
+            "1":     "",   // pingüino (Linux)
+            "2":     "",   // codigo </>
+            "3":     "",   // circulo (navegador)
+            "4:Q":   "",   // burbuja de chat
+            "5:W":   "",   // codigo </>
+            "6:E":   "",   // circulo (navegador)
+            "7:A":   "A",
+            "8:S":   "S"
         },
         // Los 8 siempre visibles. La lista vacia = en todas las salidas; los que
         // no existen en sway (= vacios) reciben la clase .persistent y se pintan

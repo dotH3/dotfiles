@@ -112,7 +112,7 @@ button:hover {
     padding: 0;
     min-width: 20px;
     background: transparent;
-    color: @wsused;
+    color: #ffffff;
     border-radius: 50%;
     box-shadow: none;
 }

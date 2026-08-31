@@ -47,7 +47,7 @@ exec_always "killall -q waybar; pkill -f 'media-cava[.]sh'; pkill -f 'waybar/cav
 exec_always "killall -q nm-applet; exec nm-applet --indicator"
 
 # Arrancar mako (notificaciones)
-exec_always "killall -q mako; mako & sleep 1; notify-send 'hey, hii' 'lets code :)'"
+exec_always "killall -q mako; mako & sleep 1; notify-send -i $HOME/dotfiles/assets/prompt.png 'hey, hii' 'lets code :)'"
 
 # Plank (dock) deshabilitado: en Sway (Wayland puro) bamf no puede mostrar el
 # indicador de "app abierta" para ventanas xdg_shell nativas, solo para las que
