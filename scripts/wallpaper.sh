@@ -20,7 +20,8 @@
 # Levanta su propio swaybg, que se pone encima y tapa a mpvpaper.
 
 MODE="${WALLPAPER_MODE:-video}"
-VIDEO="${WALLPAPER_VIDEO:-$HOME/dotfiles/wallpapers/rei-animated.mp4}"
+VIDEO="${WALLPAPER_VIDEO:-$HOME/dotfiles/wallpapers/abi-toads-terrarium.mp4}"
+# VIDEO="${WALLPAPER_VIDEO:-$HOME/dotfiles/wallpapers/rei-animated.mp4}"
 IMAGE="${WALLPAPER_IMAGE:-$HOME/dotfiles/wallpapers/rei.jpg}"
 
 # sway no siempre hereda ~/.local/bin en el PATH, así que lo buscamos a mano

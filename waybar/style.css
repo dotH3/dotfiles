@@ -7,11 +7,11 @@
 @define-color overlay0 #6c7086;  /* apagado / muteado */
 @define-color subtext  #a6adc8;  /* texto e iconos normales */
 @define-color text     #cdd6f4;  /* énfasis */
-@define-color accent   #89b4fa;  /* activo */
-@define-color ok       #a6e3a1;  /* cargando / correcto */
+@define-color accent   #a6e3a1;  /* activo */
+@define-color ok       @accent;   /* cargando / correcto (mismo verde que activo) */
 @define-color warn     #f9e2af;  /* advertencia */
 @define-color crit     #f38ba8;  /* crítico */
-@define-color wsused   #8ca0d7;  /* workspace con ventanas (tenue) */
+@define-color wsused   #8fbf8a;  /* workspace con ventanas (tenue) — sin uso hoy */
 
 * {
     /* Symbols Nerd Font cubre todos los glifos usados (rango Material Design
@@ -104,7 +104,7 @@ button:hover {
    Tres estados legibles de un vistazo:
      · vacio    → gris apagado
      · ocupado  → azul tenue
-     · activo   → circulo blanco relleno con texto negro                     */
+     · activo   → circulo verde (@accent) relleno con texto blanco           */
 #workspaces button {
     /* margen vertical + min-width iguales: la caja queda cuadrada y el
        border-radius la convierte en un circulo perfecto para el activo. */
@@ -137,8 +137,8 @@ button:hover {
 
 #workspaces button.focused,
 #workspaces button.active {
-    background: #ffffff;
-    color: #000000;
+    background: @accent;
+    color: #ffffff;
     box-shadow: none;
 }
 

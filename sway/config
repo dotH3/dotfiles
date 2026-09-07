@@ -288,6 +288,13 @@ bindsym $mod+r mode "resize"
 #     }
 # }
 
+# Espacio entre ventanas (inner) y contra los bordes de la pantalla (outer).
+# smart_gaps off los mantiene incluso con una sola ventana, así se sigue viendo
+# el wallpaper alrededor.
+gaps inner 8
+gaps outer 4
+smart_gaps off
+
 # Bordes de color sin la barrita de título (que come pantalla).
 default_border pixel 2
 # Las flotantes sí muestran la barra, para distinguirlas de un vistazo.
@@ -297,13 +304,23 @@ default_floating_border normal
 # respete el estilo Italic en vez de solo tratarlo como parte del nombre).
 font pango:monospace Italic 10
 
-# Barrita de título sin fondo ni borde propio (el 1er y 2do valor van con
-# alpha 00): así solo queda visible el "child_border", que es el marco que
-# rodea toda la ventana (el que sí queremos conservar). Formato:
-# client.<estado> <border> <background> <text> <indicator> <child_border>
-client.focused          #4c789900 #28557700 #ffffff #2e9ef4 #285577
-client.focused_inactive #33333300 #5f676a00 #ffffff #484e50 #5f676a
-client.unfocused        #33333300 #22222200 #888888 #292d2e #222222
+# Paleta, en sync con los @define-color de waybar/style.css. Sway expande las
+# variables dentro de un color, así que el verde se cambia en un solo lugar.
+set $accent   #a6e3a1
+set $inactive #5f676a
+set $dim      #222222
+set $bg       #1e1e2e
+set $fg       #ffffff
+set $fg-dim   #888888
+# Formato: client.<estado> <border> <background> <text> <indicator> <child_border>
+#
+# Las tiled usan "pixel 2", que solo pinta <child_border>. Las flotantes usan
+# "normal", que ademas dibuja la barrita de titulo arriba con <background>.
+# Ojo: <background> tiene que ser opaco. Con alpha 00 la barra existe y ocupa
+# su alto, pero no se pinta, y la ventana queda sin borde superior visible.
+client.focused          $accent   $accent   $bg     $accent   $accent
+client.focused_inactive $inactive $inactive $fg     $inactive $inactive
+client.unfocused        $dim      $dim      $fg-dim $dim      $dim
 
 ### Dock (plank)
 #
