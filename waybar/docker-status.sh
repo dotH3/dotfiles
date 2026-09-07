@@ -1,9 +1,9 @@
 #!/bin/bash
-# Reporta el estado del stack de docker compose en formato JSON para waybar (custom/docker)
+# Reporta el estado de todos los stacks de docker compose en JSON para waybar
+# (custom/docker). El registro de stacks vive en scripts/docker-stacks.sh.
 
-PROJECT_DIR="${WAYBAR_DOCKER_PROJECT_DIR:-$HOME/docker/db}"
-STARTING_FLAG="/tmp/docker_starting"
-KILLING_FLAG="/tmp/docker_killing"
+source "$(dirname "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")")/scripts/docker-stacks.sh"
+
 ICON=$'󰡨' # nf-md-docker
 
 # Escapa lo mínimo para incrustar texto arbitrario (nombres, errores) en el JSON.
@@ -21,63 +21,102 @@ emit() {
     exit 0
 }
 
+nl=$'\n'
+mapfile -t stacks < <(docker_stack_ids)
+
 # Estados transitorios: docker_up.sh / docker_down.sh dejan un flag y mandan RTMIN+9
-[[ -e "$STARTING_FLAG" ]] && emit "$ICON …" "Levantando contenedores…" "starting"
-[[ -e "$KILLING_FLAG" ]] && emit "$ICON …" "Deteniendo contenedores…" "stopping"
-
-[[ -d "$PROJECT_DIR" ]] ||
-    emit "$ICON ✗" "No existe el proyecto compose:"$'\n'"$PROJECT_DIR" "error"
-
-if ! out=$(docker compose --project-directory "$PROJECT_DIR" ps --all --format json 2>&1); then
-    case "$out" in
-    *"permission denied"*)
-        msg="Sin permisos sobre el socket de Docker"$'\n'"sudo usermod -aG docker $USER (y volver a iniciar sesión)"
-        ;;
-    *"Cannot connect"* | *daemon*)
-        msg="El daemon de Docker no está corriendo"
-        ;;
-    *)
-        msg=${out%%$'\n'*}
-        ;;
-    esac
-    emit "$ICON ✗" "$msg" "error"
+starting=() stopping=()
+for id in "${stacks[@]}"; do
+    docker_stack_load "$id"
+    [[ -e $(docker_stack_flag "$id" starting) ]] && starting+=("$STACK_LABEL")
+    [[ -e $(docker_stack_flag "$id" killing) ]] && stopping+=("$STACK_LABEL")
+done
+if ((${#starting[@]})); then
+    emit "$ICON …" "Levantando: ${starting[*]}" "starting"
+fi
+if ((${#stopping[@]})); then
+    emit "$ICON …" "Deteniendo: ${stopping[*]}" "stopping"
 fi
 
-# compose devuelve un array JSON (o NDJSON en versiones viejas): ambos se aplanan igual
-mapfile -t rows < <(
-    printf '%s' "$out" |
-        jq -r 'if type == "array" then .[] else . end | "\(.Name)|\(.State)"' 2>/dev/null
-)
+# Traduce el error de compose a un mensaje corto y accionable
+daemon_error() {
+    case "$1" in
+    *"permission denied"*)
+        printf 'Sin permisos sobre el socket de Docker%s%s' "$nl" \
+            "sudo usermod -aG docker $USER (y volver a iniciar sesión)"
+        ;;
+    *"Cannot connect"* | *daemon*) printf 'El daemon de Docker no está corriendo' ;;
+    *) printf '%s' "${1%%$'\n'*}" ;;
+    esac
+}
 
-running=()
-stopped=()
-for row in "${rows[@]}"; do
-    name=${row%%|*}
-    state=${row##*|}
-    [[ -n $name ]] || continue
-    if [[ $state == running ]]; then
-        running+=("  $name")
-    else
-        stopped+=("  $name ($state)")
+total_running=0
+stacks_up=0
+tooltip=""
+errors=()
+
+for id in "${stacks[@]}"; do
+    docker_stack_load "$id"
+    [[ -n $tooltip ]] && tooltip+="$nl"
+
+    if [[ ! -d $STACK_DIR ]]; then
+        errors+=("$STACK_LABEL")
+        tooltip+="$STACK_ICON $STACK_LABEL — ✗ sin proyecto compose$nl  $STACK_DIR$nl"
+        continue
     fi
+
+    if ! out=$(docker compose --project-directory "$STACK_DIR" ps --all --format json 2>&1); then
+        errors+=("$STACK_LABEL")
+        tooltip+="$STACK_ICON $STACK_LABEL — ✗ $(daemon_error "$out")$nl"
+        continue
+    fi
+
+    # compose devuelve un array JSON (o NDJSON en versiones viejas): ambos se aplanan igual
+    mapfile -t rows < <(
+        printf '%s' "$out" |
+            jq -r 'if type == "array" then .[] else . end | "\(.Name)|\(.State)"' 2>/dev/null
+    )
+
+    running=() stopped=()
+    for row in "${rows[@]}"; do
+        name=${row%%|*}
+        state=${row##*|}
+        [[ -n $name ]] || continue
+        if [[ $state == running ]]; then
+            running+=("  ● $name")
+        else
+            stopped+=("  ○ $name ($state)")
+        fi
+    done
+
+    ((total_running += ${#running[@]}))
+    ((${#running[@]})) && ((stacks_up++))
+
+    if ((${#running[@]} + ${#stopped[@]} == 0)); then
+        tooltip+="$STACK_ICON $STACK_LABEL — sin contenedores$nl"
+        continue
+    fi
+
+    if ((${#running[@]})); then
+        tooltip+="$STACK_ICON $STACK_LABEL — corriendo$nl"
+    else
+        tooltip+="$STACK_ICON $STACK_LABEL — detenido$nl"
+    fi
+    ((${#running[@]})) && tooltip+="$(printf '%s\n' "${running[@]}")$nl"
+    ((${#stopped[@]})) && tooltip+="$(printf '%s\n' "${stopped[@]}")$nl"
 done
 
-if ((${#running[@]} + ${#stopped[@]} == 0)); then
-    emit "$ICON 0" "Sin contenedores en $PROJECT_DIR"$'\n\n'"Click para levantar" "stopped"
+tooltip+="${nl}Click para elegir stack"
+
+# Un stack roto no oculta a los demás: el error sólo gana si nada está corriendo
+if ((${#errors[@]} && total_running == 0)); then
+    emit "$ICON ✗" "$tooltip" "error"
 fi
 
-nl=$'\n'
-tooltip=""
-if ((${#running[@]})); then
-    tooltip="Corriendo:$nl$(printf '%s\n' "${running[@]}")"
-fi
-if ((${#stopped[@]})); then
-    [[ -n $tooltip ]] && tooltip+="$nl"
-    tooltip+="Detenidos:$nl$(printf '%s\n' "${stopped[@]}")"
-fi
-
-if ((${#running[@]})); then
-    emit "$ICON ${#running[@]}" "$tooltip$nl${nl}Click para detener" "running"
+if ((total_running == 0)); then
+    emit "$ICON 0" "$tooltip" "stopped"
+elif ((stacks_up < ${#stacks[@]})); then
+    emit "$ICON $total_running" "$tooltip" "partial"
 else
-    emit "$ICON 0" "$tooltip$nl${nl}Click para levantar" "stopped"
+    emit "$ICON $total_running" "$tooltip" "running"
 fi

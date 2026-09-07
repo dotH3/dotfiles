@@ -165,11 +165,15 @@
         "on-click": "$HOME/.config/waybar/power-menu.sh"
     },
     "custom/docker": {
+        // Estado agregado de los stacks (mysql, postgres) definidos en
+        // scripts/docker-stacks.sh. Click izquierdo abre el menú fuzzel para
+        // elegir stack; click derecho alterna todo de una.
         "exec": "$HOME/.config/waybar/docker-status.sh",
         "return-type": "json",
         "interval": 15,
         "signal": 9,
-        "on-click": "$HOME/.config/waybar/docker-toggle.sh",
+        "on-click": "$HOME/.config/waybar/docker-menu.sh",
+        "on-click-right": "$HOME/.config/waybar/docker-toggle.sh",
         "tooltip": true
     },
     "custom/vpn": {

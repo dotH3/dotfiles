@@ -209,6 +209,12 @@ button:hover {
     color: @accent;
 }
 
+/* Algún stack arriba y otro abajo: mismo verde pero atenuado */
+#custom-docker.partial {
+    color: @accent;
+    opacity: 0.65;
+}
+
 #custom-docker.starting,
 #custom-docker.stopping {
     color: @warn;

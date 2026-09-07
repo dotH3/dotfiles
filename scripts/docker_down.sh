@@ -1,13 +1,41 @@
 #!/bin/bash
+# Detiene uno o varios stacks de docker compose.
+#   docker_down.sh            -> todos los stacks
+#   docker_down.sh mysql      -> solo ese stack
 
-PROJECT_DIR="$HOME/docker/db/"
-killingFlag="/tmp/docker_killing"
+source "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/docker-stacks.sh"
 
-# El flag lo lee waybar (custom/docker) para mostrar el estado "deteniendo"
-trap 'rm -f "$killingFlag"; pkill -RTMIN+9 waybar' EXIT
+# El status de mapfile es el suyo, no el de la sustitucion: se valida antes
+selection=$(docker_stack_targets "$@") || exit 1
+[[ -n $selection ]] || exit 1
+mapfile -t targets <<<"$selection"
 
-touch "$killingFlag"
-pkill -RTMIN+9 waybar
+# Los flags los lee waybar (custom/docker) para mostrar el estado "deteniendo"
+flags=()
+cleanup() {
+    rm -f "${flags[@]}"
+    docker_refresh_waybar
+}
+trap cleanup EXIT
 
-docker compose --project-directory "$PROJECT_DIR" stop
-echo "=> Container stopped"
+for id in "${targets[@]}"; do
+    flags+=("$(docker_stack_flag "$id" killing)")
+done
+touch "${flags[@]}"
+docker_refresh_waybar
+
+status=0
+for id in "${targets[@]}"; do
+    docker_stack_load "$id"
+    echo "=> Deteniendo $STACK_LABEL ($STACK_DIR)"
+    if docker compose --project-directory "$STACK_DIR" stop; then
+        echo "=> $STACK_LABEL stopped"
+    else
+        echo "=> Error deteniendo $STACK_LABEL" >&2
+        status=1
+    fi
+    rm -f "$(docker_stack_flag "$id" killing)"
+    docker_refresh_waybar
+done
+
+exit "$status"

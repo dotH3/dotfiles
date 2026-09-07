@@ -1,0 +1,16 @@
+name: ecomenu
+services:
+  db:
+    image: mysql:8.0
+    container_name: ecomenu-db
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: ecomenuDB
+      MYSQL_USER: nestuser
+      MYSQL_PASSWORD: nestpassword
+    ports:
+      - '3307:3306'    # <-- Host:Contenedor
+    volumes:
+      - db_data:/var/lib/mysql
+volumes:
+  db_data:
