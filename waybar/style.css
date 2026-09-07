@@ -117,6 +117,13 @@ button:hover {
     box-shadow: none;
 }
 
+/* Separación en tres grupos: 1-3 | Q-E | A-S. El 4º y el 7º botón
+   (los que abren grupo) reciben un margen izquierdo mayor. */
+#workspaces button:nth-child(4),
+#workspaces button:nth-child(7) {
+    margin-left: 12px;
+}
+
 /* Los workspaces que no existen en sway son, por definicion, los vacios. */
 #workspaces button.persistent {
     color: @overlay0;

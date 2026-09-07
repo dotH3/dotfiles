@@ -57,7 +57,14 @@ exec_always "killall -q mako; mako & sleep 1; notify-send -i $HOME/dotfiles/asse
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg ~/dotfiles/wallpapers/rei.jpg fill
+#output * bg ~/dotfiles/wallpapers/rei.jpg fill
+#output * bg #000000 solid_color
+#
+# El fondo lo levanta wallpaper.sh (modo video con mpvpaper por defecto; adentro
+# del script se cambia a imagen o negro). Las dos líneas "output * bg" de arriba
+# quedan comentadas a propósito: levantan swaybg, que se pone encima y tapa el
+# wallpaper animado.
+exec_always ~/dotfiles/scripts/wallpaper.sh
 #
 # Example configuration:
 #
